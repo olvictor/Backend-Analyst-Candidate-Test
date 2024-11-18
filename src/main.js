@@ -3,23 +3,15 @@ const databaseConnect = require("./database/db");
 const app =  express();
 const mongoose = require("mongoose");
 const userSchema = require("./database/Schema");
+const PropietariosSchema = require("./database/schemas/Proprietarios");
+const rotas = require("./rotas/rotas");
 require('dotenv').config();
 
 const PORT = process.env.PORT
 const db = databaseConnect();
-const UserModel = mongoose.model('users', userSchema);
 
-app.get("/",async(req,res)=>{
-  // const usuario = new UserModel({
-  //   username: "aaaaa",
-  //   password: "123"
-  // })
-  // usuario.save()
-
-  console.log( await UserModel.find())
-  res.send("askopaskopaskop")
-})
-
+app.use(express.json())
+app.use(rotas)
 app.listen(PORT,()=>{
-  console.log("skaopakopskapo")
+  console.log(`Servidor aberto na porta ${PORT}`)
 })
