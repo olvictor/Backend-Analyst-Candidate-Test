@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 const ProdutosSchema = new mongoose.Schema({
     título: String,
-    descrição: String,
+    descricao: String,
     preco: Number,
     categoria: {
         type: mongoose.SchemaTypes.ObjectId,

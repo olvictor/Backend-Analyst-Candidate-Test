@@ -16,8 +16,12 @@ const cadastrarCategoria = async(req,res) => {
         descricao: "descricao de categoria",
         ID_do_proprietario: proprietario._id
     })
-    await categoria.save();
-    res.send("categoria cadastrada com sucesso")
+    try{
+        await categoria.save();
+        res.send("categoria cadastrada com sucesso")
+    }catch(err){
+        console.log(err)
+    }
 }
 
 
