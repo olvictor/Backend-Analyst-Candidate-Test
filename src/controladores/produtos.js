@@ -1,4 +1,8 @@
-const { default: mongoose, mongo } = require("mongoose")
+const apicache = require("apicache")
+const cache = apicache.options({
+    debug: true
+  }).middleware;
+const { default: mongoose} = require("mongoose")
 const PropietariosSchema = require("../database/schemas/Proprietarios")
 const CategoriasSchema = require("../database/schemas/Categorias")
 const ProdutosSchema = require("../database/schemas/Produtos")
@@ -6,7 +10,7 @@ const proprietarioModel = mongoose.model("proprietarios",PropietariosSchema)
 const categoriaModel = mongoose.model("categorias",CategoriasSchema)
 const produtoModel = mongoose.model("produtos",ProdutosSchema)
 
-const cadastrarProduto = async(req,res) =>{
+ cadastrarProduto = async(req,res) => {
     const {ID_do_proprietário, categoria,titulo,descricao,preco} = req.body
 
     const buscarProprietario = await proprietarioModel.findOne({username: ID_do_proprietário})
@@ -38,7 +42,6 @@ const buscarProdutos = async(req,res) =>{
   const buscarProprietario =  await proprietarioModel.findOne({username:"proprietario1"})
 
   const produtos =  await produtoModel.find({ID_do_proprietario: buscarProprietario._id})
-
   res.send(produtos)
 }
 
