@@ -1,11 +1,16 @@
 const express = require("express");
 const apicache = require("apicache")
 let cache = apicache.middleware
-const { cadastrarProprietarios } = require("../controladores/proprietarios");
+const { cadastrarProprietarios, loginProprietario } = require("../controladores/proprietarios");
 const { cadastrarCategoria } = require("../controladores/Categorias");
 const { cadastrarProduto, buscarProdutos } = require("../controladores/produtos");
+const verificarLogin = require("../intermediarios/verificarLogin");
 const rotas = express();
 
+rotas.post("/login",loginProprietario)
+
+
+rotas.use(verificarLogin);
 
 // PROPRIETARIOS
 rotas.post("/proprietarios", cadastrarProprietarios)
